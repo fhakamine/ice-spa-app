@@ -57,9 +57,8 @@
       <div class="container">
         <h1>{{ title }}</h1>
         <p>{{ message }}</p>
-        <p>{{ $data }}</p>
-        <p>{{ accessToken }}</p>
         <p v-if="!isLogged"><a class="btn btn-primary btn-lg" role="button" v-on:click="login">Login with Okta &raquo;</a></p>
+        <p v-if="isLogged"><a class="btn btn-primary btn-lg" role="button" v-on:click="logout">Logout &raquo;</a></p>
       </div>
     </div>
 

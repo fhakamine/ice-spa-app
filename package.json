@@ -2,7 +2,7 @@
   "name": "ice-spa-app",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "js/server.js",
   "dependencies": {
     "node-static": "^0.7.9"
   },

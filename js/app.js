@@ -1,10 +1,10 @@
 
 var authClient = new OktaAuth({
-  url: 'https://frederico.oktapreview.com/oauth2/ausai1vaugWVwHpSD0h7',
-  clientId: 'n26ajsDBeitlUuKReKpq',
+  url: 'https://oktacdev021.oktapreview.com/oauth2/ausak4rcb3sW3BmB20h7',
+  clientId: 'yFRyrCIvqfq6MDalZzng',
   redirectUri: window.location.href,
-  issuer: 'https://frederico.oktapreview.com/oauth2/ausai1vaugWVwHpSD0h7',
-  authorizeUrl: 'https://frederico.oktapreview.com/oauth2/ausai1vaugWVwHpSD0h7/v1/authorize'
+  issuer: 'https://oktacdev021.oktapreview.com/oauth2/ausak4rcb3sW3BmB20h7',
+  authorizeUrl: 'https://oktacdev021.oktapreview.com/oauth2/ausak4rcb3sW3BmB20h7/v1/authorize'
 });
 
 var app = new Vue({
@@ -33,8 +33,15 @@ var app = new Vue({
     login: function () {
       authClient.token.getWithRedirect({
         responseType: ['token', 'id_token'],
-        scopes: ['promos:create', 'promos:read', 'promos:cancel', 'openid', 'profile', 'email'],
+        scopes: ['promos:read', 'openid', 'profile', 'email'],
       });
+    },
+    logout: function () {
+      app.$data.title = 'Welcome';
+      app.$data.message = 'Okta Ice Management';
+      window.localStorage.removeItem('access_token');
+      window.localStorage.removeItem('id_token');
+      app.$data.isLogged = false;
     },
     checkToken: function () {
       // If the token is in the url after the redirect
@@ -54,7 +61,7 @@ var app = new Vue({
     getPromos: function() {
 
       // GET request
-      this.$http.get('https://ice-rs-fred.herokuapp.com/promos', function (data) {
+      this.$http.get('https://ice-rs-oktavius.herokuapp.com/publicpromos', function (data) {
           // set data on vm
           app.$data.promos = data;
           console.log(data);
@@ -66,7 +73,7 @@ var app = new Vue({
     },
     savePromo: function() {
       // GET request
-      this.$http.post('https://ice-rs-fred.herokuapp.com/promos', app.$data.newPromo, {emulateJSON:true}, function(res){
+      this.$http.post('https://ice-rs-oktavius.herokuapp.com/promos', app.$data.newPromo, {emulateJSON:true}, function(res){
           // resetform
           app.$data.newPromo.code = null;
           app.$data.newPromo.validity = null;
